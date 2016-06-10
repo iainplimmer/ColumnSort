@@ -4,30 +4,7 @@
     <meta charset="utf-8">
     <title>ng-gridify</title>
     <script src="./node_modules/angular/angular.min.js"></script>
-    <script>
-        (function(angular){
-            'use strict';
-            angular.module('ngGridify',[])
-                .controller('ctrlPeople', function ($http) {
-                    var vm = this;
-
-                    vm.data = [];
-                    vm.orderBy = 'name'
-                    vm.reverse = false;
-
-                    vm.SortColumn = function (column) {
-                        vm.orderBy = column;
-                        vm.reverse = !vm.reverse;
-                    }
-
-                    vm.$onInit = function () {
-                        $http.get('./resources/people.json').then(function success(response){
-                            vm.data = response.data;    
-                        })
-                    };                    
-                })
-        })(angular);
-    </script>
+    <script src="./scripts/app.js"></script>
 </head>
 <body ng-app="ngGridify" ng-controller="ctrlPeople as ctrl">
     <table>
