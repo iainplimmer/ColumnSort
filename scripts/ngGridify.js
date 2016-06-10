@@ -22,11 +22,8 @@
             '<tr>',
             '<th ng-repeat="column in ctrl.columns"><a href="#" ng-click="ctrl.SortColumn(column)">{{column}}</a></th>',
             '</tr>',
-            '<tr ng-repeat="person in ctrl.data | orderBy : ctrl.order : ctrl.reverse">',
-            '<td>{{person.name}}</td>',
-            '<td>{{person.age}}</td>',
-            '<td>{{person.gender}}</td>',
-            '<td>{{person.email}}</td>',
+            '<tr ng-repeat="item in ctrl.data | orderBy : ctrl.order : ctrl.reverse">',
+            '<td ng-repeat="column in ctrl.columns">{{item[column]}}</td>',
             '</tr>',
             '</table>'
         ].join('')
