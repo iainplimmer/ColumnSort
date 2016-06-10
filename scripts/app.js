@@ -6,7 +6,9 @@
         var vm = this;
         vm.$onInit = function () { 
             $http.get('./resources/people.json').then(function success(response){            
-                vm.data = response.data;              
+                vm.data = response.data;    
+                vm.order = 'age';    
+                vm.columns = ['name', 'age', 'gender', 'email']      
             });
         };
     })

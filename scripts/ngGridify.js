@@ -4,19 +4,17 @@
     angular.module('ngGridify', [])
         .component('ngGridify', {
         bindings: {
-            data: '='
+            data: '=',
+            order: '='
         },
         controllerAs: 'ctrl',
         controller: function ($http) {
             var vm = this;
 
-            vm.orderBy = 'name'
             vm.reverse = false;
 
-            vm.SortColumn = SortColumn;
-
-            function SortColumn (column) {
-                vm.orderBy = column;
+            vm.SortColumn = function SortColumn (column) {
+                vm.order = column;
                 vm.reverse = !vm.reverse;
             }
 
@@ -29,7 +27,7 @@
             '<th><a href="#" ng-click="ctrl.SortColumn(\'gender\')">Gender</a></th>',
             '<th><a href="#" ng-click="ctrl.SortColumn(\'email\')">Email</a></th>',
             '</tr>',
-            '<tr ng-repeat="person in ctrl.data | orderBy : ctrl.orderBy:ctrl.reverse">',
+            '<tr ng-repeat="person in ctrl.data | orderBy : ctrl.order : ctrl.reverse">',
             '<td>{{person.name}}</td>',
             '<td>{{person.age}}</td>',
             '<td>{{person.gender}}</td>',
