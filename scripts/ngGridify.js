@@ -16,7 +16,7 @@
             }
         },
         template: [
-            '<table><tr>',
+            '<table class="{{ctrl.config.class}}"><tr>',
 
             //  HEADER: We want to loop over the column names one by one, and sow the display names
             '<th ng-repeat="column in ctrl.config.columns"><a href="#" ng-click="ctrl.SortColumn(column.column)">{{column.display}}</a></th>',

@@ -11,6 +11,7 @@
                 vm.config = {
                     data : response.data,
                     order : 'name', 
+                    class : 'table',
                     columns: [
                         { column: 'name', display: 'Name', type: 'text' }, 
                         { column: 'age', display: 'Age', type: 'number' },
