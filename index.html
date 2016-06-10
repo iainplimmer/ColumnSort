@@ -5,21 +5,9 @@
     <title>ng-gridify</title>
     <script src="./node_modules/angular/angular.min.js"></script>
     <script src="./scripts/app.js"></script>
+    <script src="./scripts/ngGridify.js"></script>
 </head>
-<body ng-app="ngGridify" ng-controller="ctrlPeople as ctrl">
-    <table>
-        <tr>
-            <th><a href="#" ng-click="ctrl.SortColumn('name')">Name</a></th>
-            <th><a href="#" ng-click="ctrl.SortColumn('age')">Age</a></th>
-            <th><a href="#" ng-click="ctrl.SortColumn('gender')">Gender</a></th>
-            <th><a href="#" ng-click="ctrl.SortColumn('email')">Email</a></th>
-        </tr>        
-        <tr ng-repeat="person in ctrl.data | orderBy : ctrl.orderBy:ctrl.reverse">
-            <td>{{person.name}}</td>
-            <td>{{person.age}}</td>
-            <td>{{person.gender}}</td>
-            <td>{{person.email}}</td>
-        </tr>
-    </table>
+<body ng-app="MyApp" ng-controller="ctrlPeople as ctrl">
+    <ng-gridify data='ctrl.data'></ng-gridify>
 </body>
 </html>
