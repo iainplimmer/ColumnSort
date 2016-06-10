@@ -20,10 +20,10 @@
         template: [
             '<table>',
             '<tr>',
-            '<th ng-repeat="column in ctrl.columns"><a href="#" ng-click="ctrl.SortColumn(column)">{{column}}</a></th>',
+            '<th ng-repeat="column in ctrl.columns"><a href="#" ng-click="ctrl.SortColumn(column.column)">{{column.display}}</a></th>',
             '</tr>',
             '<tr ng-repeat="item in ctrl.data | orderBy : ctrl.order : ctrl.reverse">',
-            '<td ng-repeat="column in ctrl.columns">{{item[column]}}</td>',
+            '<td ng-repeat="column in ctrl.columns">{{item[column.column]}}</td>',
             '</tr>',
             '</table>'
         ].join('')
