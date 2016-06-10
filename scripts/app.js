@@ -12,10 +12,11 @@
                     data : response.data,
                     order : 'name', 
                     columns: [
-                        { column: 'name', display: 'Name' }, 
-                        { column: 'age', display: 'Age' },
-                        { column: 'gender', display: 'Gender' },
-                        { column: 'email', display: 'Email' },
+                        { column: 'name', display: 'Name', type: 'text' }, 
+                        { column: 'age', display: 'Age', type: 'number' },
+                        { column: 'gender', display: 'Gender', type: 'text' },
+                        { column: 'email', display: 'Email', type: 'email' },
+                        { column: 'website', display: 'link', type: 'link' }
                     ]         
                 };
 
