@@ -12,12 +12,13 @@
                     data : response.data,
                     order : 'name', 
                     class : 'table',
+                    itemsperpage: 10,
                     columns: [
                         { column: 'name', display: 'Name', type: 'text' }, 
                         { column: 'age', display: 'Age', type: 'number' },
                         { column: 'gender', display: 'Gender', type: 'text' },
                         { column: 'email', display: 'Email', type: 'email' },
-                        { column: 'website', display: 'link', type: 'link' }
+                        { column: 'website', display: 'Link', type: 'link' }
                     ]         
                 };
 
