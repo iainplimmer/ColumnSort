@@ -1,0 +1,22 @@
+{
+  "name": "ng-gridify",
+  "version": "0.0.1",
+  "description": "Generic grid for angularJS",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "angular",
+    "grid",
+    "gridify",
+    "nggridify"
+  ],
+  "author": "Iain Plimmer",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.5.6",
+    "lite-server": "^2.2.0",
+    "lodash": "^4.13.1"
+  }
+}

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ng-gridify</title>
+    <script src="./node_modules/angular/angular.min.js"></script>
+    <script>
+        (function(angular){
+            'use strict';
+            angular.module('ngGridify',[])
+                .controller('ctrlPeople', function ($http) {
+                    var vm = this;
+
+                    vm.data = [];
+                    vm.orderBy = 'name'
+                    vm.reverse = false;
+
+                    vm.SortColumn = function (column) {
+                        vm.orderBy = column;
+                        vm.reverse = !vm.reverse;
+                    }
+
+                    vm.$onInit = function () {
+                        $http.get('./resources/people.json').then(function success(response){
+                            vm.data = response.data;    
+                        })
+                    };                    
+                })
+        })(angular);
+    </script>
+</head>
+<body ng-app="ngGridify" ng-controller="ctrlPeople as ctrl">
+    <table>
+        <tr>
+            <th><a href="#" ng-click="ctrl.SortColumn('name')">Name</a></th>
+            <th><a href="#" ng-click="ctrl.SortColumn('age')">Age</a></th>
+            <th><a href="#" ng-click="ctrl.SortColumn('gender')">Gender</a></th>
+            <th><a href="#" ng-click="ctrl.SortColumn('email')">Email</a></th>
+        </tr>        
+        <tr ng-repeat="person in ctrl.data | orderBy : ctrl.orderBy:ctrl.reverse">
+            <td>{{person.name}}</td>
+            <td>{{person.age}}</td>
+            <td>{{person.gender}}</td>
+            <td>{{person.email}}</td>
+        </tr>
+    </table>
+</body>
+</html>
