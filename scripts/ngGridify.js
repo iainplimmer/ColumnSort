@@ -39,13 +39,23 @@
                 }
             );
 
+            if (!vm.config.columns || vm.config.columns.length === 0) {
+                console.error('You need to provide valid column configuration to ng-gridify.');
+            }
+
             vm.GetNumber = function (num) {
-                return new Array(num);       
+                try {
+                    return new Array(num);
+                }   
+                catch(err) {
+                    console.error('You need to provide the itemsPerPage config property to ng-gridify')
+                }    
             }
 
         },
         template: [
-            '<table class="{{ctrl.config.class}}">',
+            '<div ng-show="{{ctrl.config.data}}">{{ctrl.config.data.length}} records found.</div>',
+            '<table class="{{ctrl.config.class}}" ng-show="ctrl.config.data.length">',
             '<tr>',
 
             //  HEADER: We want to loop over the column names one by one, and sow the display names
