@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ng-gridify</title>
+    <script src="./node_modules/angular/angular.min.js"></script>
+    <script src="./scripts/ngGridify.js"></script>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css"> 
+    <script>
+    angular.module('NamesApplication',['ngGridify'])
+        .controller('ctrlPeople', function ($scope) {
+            
+            $scope.config = {
+                data : [
+                    { "name":"Iain", "age":"39"},
+                    { "name":"Sara", "age":"38"},
+                    { "name":"Erin", "age":"10"},
+                    { "name":"William", "age":"9"},
+                    { "name":"Jeremy", "age":"69"},
+                    { "name":"Christine", "age":"66"},      
+                    { "name":"Joanne", "age":"37"},      
+                    { "name":"Anton", "age":"38"},      
+                    { "name":"Nico", "age":"5"},      
+                    { "name":"Louca", "age":"8"},                                         
+                    ],
+                order : 'name', 
+                class : 'table',
+                itemClick : null,
+                itemClickText : null,
+                itemsPerPage: 5,
+                paging: true,
+                columns: [
+                    { column: 'name', display: 'Person\'s Name', type: 'text' }, 
+                    { column: 'age', display: 'Age', type: 'text' }
+                ]         
+            };
+
+        })
+    </script>
+</head>
+<body ng-app="NamesApplication" ng-controller="ctrlPeople">
+    <h2>Simple grid with paging and sorting</h2>
+    <p>Here's an example of a grid with sorting and paging bound to a collection on scope.</p>
+    <ng-gridify config='config'></ng-gridify>
+</body>
+</html>

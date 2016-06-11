@@ -50,6 +50,9 @@
 
             //  HEADER: We want to loop over the column names one by one, and sow the display names
             '<th ng-repeat="column in ctrl.config.columns"><a href="#" ng-click="ctrl.SortColumn(column.column)">{{column.display}}</a></th>',
+
+            //  We show and hide this column if a click event has been provided for the item row
+            '<th ng-show="ctrl.config.itemClick"></th>',
             
             '</tr>',
 
@@ -69,12 +72,12 @@
             '</td>',
 
             //  COLUMN: Show the item click column if a function has been defined
-            '<td><button class="btn btn-info" ng-show="ctrl.config.itemClick" type="button" ng-click="ctrl.config.itemClick(item)">{{ctrl.config.itemClickText}}</button></td>',
+            '<td ng-show="ctrl.config.itemClick" ><button class="btn btn-info"type="button" ng-click="ctrl.config.itemClick(item)">{{ctrl.config.itemClickText}}</button></td>',
             '</tr>',
             '</table>',
 
             //  PAGING
-            '<nav>',
+            '<nav ng-show="ctrl.config.paging">',
             '<ul class="pagination">',
             '<li ng-repeat="item in ctrl.GetNumber(ctrl.pages) track by $index" class="page-item"><a class="page-link" href="#" ng-click="ctrl.ChangePage($index)">{{$index+1}}</a></li>',
             '</ul>',

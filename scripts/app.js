@@ -20,6 +20,7 @@
                     itemClick : vm.clicker,
                     itemClickText : 'Open click event',
                     itemsPerPage: 10,
+                    paging: true,
                     columns: [
                         { column: 'name', display: 'Name', type: 'text' }, 
                         { column: 'age', display: 'Age', type: 'number' },
