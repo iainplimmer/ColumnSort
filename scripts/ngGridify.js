@@ -34,7 +34,7 @@
             //  We need to wait until we have the data, then let's create the page numbers
             $scope.$watch('ctrl.config.data', function (data) {
                     if (data) {
-                        vm.pages = Math.ceil(data.length / vm.config.itemsperpage);
+                        vm.pages = Math.ceil(data.length / vm.config.itemsPerPage);
                     }  
                 }
             );
@@ -54,28 +54,31 @@
             '</tr>',
 
             //  ROW: Now we repeat over the items in the JSON, and dynamically create the columns
-            '<tr ng-repeat="item in ctrl.config.data| orderBy: ctrl.config.order : ctrl.reverse | offset:(ctrl.currentpage * ctrl.config.itemsperpage) | limitTo: ctrl.config.itemsperpage">',
+            '<tr ng-repeat="item in ctrl.config.data| orderBy: ctrl.config.order : ctrl.reverse | offset:(ctrl.currentpage * ctrl.config.itemsPerPage) | limitTo: ctrl.config.itemsPerPage">',
             '<td ng-repeat="column in ctrl.config.columns">',
 
-            //  COLUMN: Handling of text types shown
+            //  COLUMN: Handling of 'text' and 'number' types shown
             '<span ng-show="column.type==\'text\' || column.type==\'number\'">{{item[column.column]}}</span>',
             
-            //  COLUMN: Handling of email types shown
+            //  COLUMN: Handling of 'email' types shown
             '<a href="mailto:{{item[column.column]}}" ng-show="column.type==\'email\'">{{item[column.column]}}</a></span>',
 
-            //  COLUMN: Handling of link types shown
+            //  COLUMN: Handling of 'link' types shown
             '<a href="{{item[column.column]}}" ng-show="column.type==\'link\'" target="_blank">{{item[column.column]}}</a></span>',
             
             '</td>',
-            '</tr>',
-            '<tr>',
 
-            //  We make sure that the paging styled to the number of columns
-            '<td colspan="{{ctrl.config.columns.length}}">',
-            '<a href="#" ng-repeat="item in ctrl.GetNumber(ctrl.pages) track by $index" ng-click="ctrl.ChangePage($index)">{{$index+1}}</a>',
-            '</td>',
+            //  COLUMN: Show the item click column if a function has been defined
+            '<td><button class="btn btn-info" ng-show="ctrl.config.itemClick" type="button" ng-click="ctrl.config.itemClick(item)">{{ctrl.config.itemClickText}}</button></td>',
             '</tr>',
-            '</table>'
+            '</table>',
+
+            //  PAGING
+            '<nav>',
+            '<ul class="pagination">',
+            '<li ng-repeat="item in ctrl.GetNumber(ctrl.pages) track by $index" class="page-item"><a class="page-link" href="#" ng-click="ctrl.ChangePage($index)">{{$index+1}}</a></li>',
+            '</ul>',
+            '</nav>'
         ].join('')
         });
 

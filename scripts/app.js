@@ -7,12 +7,19 @@
         vm.$onInit = function () { 
             $http.get('./resources/people.json').then(function success(response){            
 
-                //  Let's make a new config object that allows us to just bind the data to columns in one
-                vm.config = {
+
+                vm.clicker = function (item) {
+                    console.log('im working, here\'s the value', item);
+                   
+                }
+
+                var config = {
                     data : response.data,
                     order : 'name', 
                     class : 'table',
-                    itemsperpage: 10,
+                    itemClick : vm.clicker,
+                    itemClickText : 'Open click event',
+                    itemsPerPage: 10,
                     columns: [
                         { column: 'name', display: 'Name', type: 'text' }, 
                         { column: 'age', display: 'Age', type: 'number' },
@@ -21,6 +28,9 @@
                         { column: 'website', display: 'Link', type: 'link' }
                     ]         
                 };
+
+                //  Let's make a new config object that allows us to just bind the data to columns in one
+                vm.config = config; 
 
                   
             });
