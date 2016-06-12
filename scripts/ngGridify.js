@@ -59,7 +59,11 @@
             '<tr>',
 
             //  HEADER: We want to loop over the column names one by one, and sow the display names
-            '<th ng-repeat="column in ctrl.config.columns"><a href="#" ng-click="ctrl.SortColumn(column.column)">{{column.display}}</a></th>',
+            '<th ng-repeat="column in ctrl.config.columns" width="{{column.width}}">',
+            '<a href="#" ng-click="ctrl.SortColumn(column.column)">{{column.display}}</a> ',
+            ' <span ng-show="ctrl.config.order == column.column && ctrl.reverse" class="glyphicon glyphicon-triangle-bottom"></span>',
+            ' <span ng-show="ctrl.config.order == column.column && !ctrl.reverse" class="glyphicon glyphicon-triangle-top"></span>',
+            '</th>',
 
             //  We show and hide this column if a click event has been provided for the item row
             '<th ng-show="ctrl.config.itemClick"></th>',
