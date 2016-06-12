@@ -34,7 +34,7 @@
             //  We need to wait until we have the data, then let's create the page numbers
             $scope.$watch('ctrl.config.data', function (data) {
                     if (data) {
-                        vm.pages = Math.ceil(data.length / vm.config.itemsPerPage);
+                        vm.pages = Math.ceil(data.length / vm.config.itemsPerPage); 
                     }  
                 }
             );
@@ -50,7 +50,7 @@
 
         },
         template: [
-            '<div ng-show="{{ctrl.config.data}}">{{ctrl.config.data.length}} records found.</div>',
+            '<div ng-show="ctrl.config.data.length != -1">{{ctrl.config.data.length}} records found.</div>',
             '<table class="{{ctrl.config.class}}" ng-show="ctrl.config.data.length">',
             '<tr>',
 
