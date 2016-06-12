@@ -39,10 +39,6 @@
                 }
             );
 
-            if (!vm.config.columns || vm.config.columns.length === 0) {
-                console.error('You need to provide valid column configuration to ng-gridify.');
-            }
-
             vm.GetNumber = function (num) {
                 try {
                     return new Array(num);
