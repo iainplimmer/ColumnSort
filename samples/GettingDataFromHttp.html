@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ng-gridify</title>
+    <script src="./node_modules/angular/angular.min.js"></script>
+    <script src="./node_modules/ng-gridify/ngGridify.js"></script>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css"> 
+    <style>
+        .table {
+            table-layout: fixed;            
+        }
+    </style>
+    <script>
+    angular.module('NamesApplication',['ngGridify'])
+        .controller('ctrlPeople', function ($http) {
+            
+            var self = this;
+            
+            //  We can follow a simple two step approach to push data into the grid from a HTTP service using the AngularJS HTTP promise
+            //  after configuring the component on the page.
+
+            //  First configure the config object that is passed to the ng-gridify component
+            this.config = {
+                  data : self.mydata,
+                  order : 'name', 
+                  class : 'table',
+                  itemClick : null,
+                  itemClickText : null,
+                  itemsPerPage: 20,
+                  paging: true,
+                  columns: [
+                      { column: 'name', display: 'Name', type: 'text', width: '200px' }, 
+                      { column: 'age', display: 'Age', type: 'number' },
+                      { column: 'gender', display: 'Gender', type: 'text' },
+                      { column: 'createddate', display: 'Date Created' , type: 'date', format: 'dd MMMM yyyy' }
+                  ]         
+            };
+
+            //  Get the content from the API call and then push it into config object to trigger the repaint of the grid.
+            $http.get('./resources/people.json').then(function (response) {
+                self.config.data = response.data;
+            });
+                 
+
+            
+        })
+    </script>
+</head>
+<body ng-app="NamesApplication" ng-controller="ctrlPeople as ctrl">
+
+    <ng-gridify config='ctrl.config'></ng-gridify>
+
+</body>
+</html>
