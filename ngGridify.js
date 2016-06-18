@@ -17,6 +17,7 @@
             controller: function ($scope) {
                 var vm = this;
                 var columnsToConvertToFloat = [];
+                var columnsToConvertToDate = [];
 
                 //  Properties available on the view                
                 vm.reverse = false;
@@ -36,6 +37,9 @@
                         if (column.type === 'number') {
                             columnsToConvertToFloat.push(column.column)
                         }
+                        else if (column.type == 'date') {
+                            columnsToConvertToDate.push(column.column)
+                        }
                     });
                 })
 
@@ -43,10 +47,13 @@
                 //  to allow correct sorting and then finally set the rowcount.
                 $scope.$watchCollection('ctrl.config.data', function (data) {   
 
-                    //  Convert each column that is required
+                    //  Convert each column that is required on numbers and dates to allow sorting 
                     angular.forEach(data, function (itemToConvert){
                         angular.forEach(columnsToConvertToFloat, function (column) {
                             itemToConvert[column] = parseFloat(itemToConvert[column]);
+                        });
+                        angular.forEach(columnsToConvertToDate, function (column) {
+                            itemToConvert[column] = new Date(itemToConvert[column]);
                         });
                     });  
 
@@ -90,7 +97,7 @@
 
                 //  HEADER: We want to loop over the column names one by one, and sow the display names
                 '<th ng-repeat="column in ctrl.config.columns" width="{{column.width}}">',
-                '<a href="#" ng-click="ctrl.SortColumn(column.column)">{{column.display}}</a> ',
+                '<a href="#" ng-click="ctrl.SortColumn(column.column)">{{column.display ? column.display : column.column}}</a> ',
                 ' <span ng-show="ctrl.config.order == column.column && ctrl.reverse" class="glyphicon glyphicon-triangle-bottom"></span>',
                 ' <span ng-show="ctrl.config.order == column.column && !ctrl.reverse" class="glyphicon glyphicon-triangle-top"></span>',
                 '</th>',
@@ -105,8 +112,11 @@
                 '<td ng-repeat="column in ctrl.config.columns">',
 
                 //  COLUMN: Handling of 'text' and 'number' types shown
-                '<span ng-show="column.type==\'text\' || column.type==\'number\'">{{item[column.column]}}</span>',
-                
+                '<span ng-show="column.type==\'text\' || column.type==\'number\' || !column.type">{{item[column.column]}}</span>',
+
+                //  COLUMN: Handling of 'date' types shown
+                '<span ng-show="column.type==\'date\' && item[column.column]">{{ item[column.column] | date:(!column.format) ? "dd MMMM yyyy" : column.format}}</span>',
+
                 //  COLUMN: Handling of 'email' types shown
                 '<a href="mailto:{{item[column.column]}}" ng-show="column.type==\'email\'">{{item[column.column]}}</a></span>',
 

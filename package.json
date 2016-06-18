@@ -1,6 +1,6 @@
 {
   "name": "ng-gridify",
-  "version": "1.3.7",
+  "version": "1.4.1",
   "description": "Generic grid for angularJS",
   "main": "",
   "scripts": { },
@@ -9,7 +9,7 @@
     "grid",
     "gridify",
     "nggridify",
-    "Paing",
+    "Paging",
     "Sorting",
     "display data",
     "ng-gridify"
