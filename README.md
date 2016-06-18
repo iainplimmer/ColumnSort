@@ -61,7 +61,7 @@ We can create a config object that we pass to the component, which will show two
 
 * **text|number** - shows the value on the page as it appears in the JSON data.
 * **email** - creates a 'mailto' link on the data.
-* **date** - formats the column as a date, you can pass in an additional format parameter here.
+* **date** - formats the column as a date, you can pass in an additional 'format' property here.
 * **link** - you guessed it, creates a link with a new window target. 
 
 Finally, let's put that together in the config object that we would pass. An example for each 'type' is included.
@@ -78,16 +78,22 @@ Finally, let's put that together in the config object that we would pass. An exa
             { column: 'name', display: 'Name', type: 'text' }, 
             { column: 'age', display: 'Age', type: 'number' },
             { column: 'email', display: 'Email', type: 'email' },
+            { column: 'createddate', display: 'Created Date', type: 'date', format: 'dd MMM yyyy' },
             { column: 'website', display: 'Link', type: 'link' }
             ]         
     };
 
-** NOTE:** If you want to sort a column that contains numbers or dates, be sure to add it's type as 'number' or 'date'. 
-** DATES:** Invalid numbers and dates will be returned as null, this will be hidden in the next version. You CANNOT call your column 'date' as this will break the configuration.
+** IMPORTANT NOTE:** 
+
+If you want to sort a column that contains numbers or dates, be sure to add it's type as 'number' or 'date'. 
+
+Invalid numbers and dates will be returned as null, this will be hidden in the next version. You CANNOT call your column 'date' as this will break the configuration.
     
 **The Columns Configuration**
-*Any column can be given a 'width' property to describe it's width in pixels (Percentage not included yet). Although this width is automatically set to the max column size if not specified.
-*You must include the name of the column as the 'column' propert, this is the minumum configuration required. If this is the case, the column will be set to the type of 'text' and the header will be the name of the 'column' as per your JSON. 
+
+Any column can be given a 'width' property to describe it's width in pixels (Percentage not included yet). Although this width is automatically set to the max column size if not specified.
+
+You must include the name of the column as the 'column' propert, this is the minumum configuration required. If this is the case, the column will be set to the type of 'text' and the header will be the name of the 'column' as per your JSON. 
 
 **Adding a function to a row**
 
