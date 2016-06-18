@@ -57,8 +57,10 @@
                         });
                     });  
 
-                    vm.pages = calculatePages(data.length, vm.config.itemsPerPage);   
-                    vm.rowcount = data.length;                 
+                    if (data) {
+                        vm.pages = calculatePages(data.length, vm.config.itemsPerPage);   
+                        vm.rowcount = data.length;
+                    }                 
                 });
 
 
