@@ -20,6 +20,7 @@
                 vm.reverse = false;
                 vm.pages = 0;
                 vm.currentpage = 0;
+                vm.rowcount = 0;
 
                 //  Function that sorts the grid by column name, opposite to the current sort
                 vm.SortColumn = function SortColumn (column) {
@@ -32,19 +33,12 @@
                     vm.currentpage = page;
                 }
             
-                //  We need to wait until we have the data, then let's create the page numbers
-                $scope.$watch('ctrl.config.data', function (data) {             
-                    if (data) {
-                        vm.pages = CalculatePages(data.length, vm.config.itemsPerPage); 
-                    }  
+                // We setup a watch on the collection to bind the paging
+                $scope.$watchCollection('ctrl.config.data', function (data) {                                
+                    vm.pages = CalculatePages(data.length, vm.config.itemsPerPage);   
+                    vm.rowcount = data.length;                 
                 });
 
-                //  We also need to watch the length of the items to create more pages as the items are added
-                $scope.$watch('ctrl.config.data.length', function (data) {
-                    if (data) {
-                        vm.pages = CalculatePages(vm.config.data.length, vm.config.itemsPerPage);
-                    }
-                });
 
                 //  Calculates the number of pages as we do this function more than once
                 function CalculatePages(numberOfItems, itemsPerPage) {
@@ -64,8 +58,8 @@
 
             },
             template: [
-                '<div ng-show="ctrl.config.data.length != -1">{{ctrl.config.data.length}} records found.</div>',
-                '<table class="{{ctrl.config.class}}" ng-show="ctrl.config.data.length">',
+                '<div>{{ctrl.rowcount}} records found.</div>',
+                '<table class="{{ctrl.config.class}}" ng-show="ctrl.rowcount > 0">',
                 '<tr>',
 
                 //  HEADER: We want to loop over the column names one by one, and sow the display names
