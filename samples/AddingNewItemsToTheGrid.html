@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <title>ng-gridify</title>
-    <script src="./node_modules/angular/angular.min.js"></script>
-    <script src="./node_modules/ng-gridify/ngGridify.js"></script>
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css"> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular.min.js"></script>
+    <script src="ngGridify.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
     <style>
         .table {
             table-layout: fixed;            
@@ -18,34 +18,33 @@
             function DoSomethingWithTheRow (row) {                
                 alert(row.name + ' has been clicked, you have the whole row item here :)');
             }
-
             this.AddNewItem = function () {
-                this.config.data.push({ "name":"A New Person!", "age":"99", "email":"newperson@iainplimmer.co.uk" });
+                this.config.data.push({ "name":"A New Person!", "age":"99", "email":"newperson@iainplimmer.co.uk", "tdate":"1 June 1980" });
             }
-
             this.config = {
                 data : [
-                    { "name":"Iain", "age":"39", "email":"iain@iainplimmer.co.uk" },
-                    { "name":"Sara", "age":"38", "email":"sara@iainplimmer.co.uk" },
-                    { "name":"Erin", "age":"10", "email":"erin@iainplimmer.co.uk" },
-                    { "name":"William", "age":"9", "email":"william@iainplimmer.co.uk" },
-                    { "name":"Jeremy", "age":"69", "email":"jeremy@iainplimmer.co.uk" },
-                    { "name":"Christine", "age":"66", "email":"christine@iainplimmer.co.uk" },      
-                    { "name":"Joanne", "age":"37", "email":"joanne@iainplimmer.co.uk" },      
-                    { "name":"Anton", "age":"38", "email":"anton@iainplimmer.co.uk" },      
-                    { "name":"Nico", "age":"5", "email":"nico@iainplimmer.co.uk" },      
-                    { "name":"Louca", "age":"8", "email":"louca@iainplimmer.co.uk" },                                         
+                    { "name":"Iain", "age":"39", "email":"iain@iainplimmer.co.uk"},
+                    { "name":"Sara", "age":"38", "email":"sara@iainplimmer.co.uk", "tdate":"11 June 2016" },
+                    { "name":"Erin", "age":"10", "email":"erin@iainplimmer.co.uk","tdate":"12 June 2016" },
+                    { "name":"William", "age":"9", "email":"william@iainplimmer.co.uk", "tdate":"30 March 2016" },
+                    { "name":"Jeremy", "age":"69", "email":"jeremy@iainplimmer.co.uk", "tdate":"1 May 2016" },
+                    { "name":"Christine", "age":"66", "email":"christine@iainplimmer.co.uk", "tdate":"1 November 2016" },      
+                    { "name":"Joanne", "age":"37", "email":"joanne@iainplimmer.co.uk", "tdate":"1 June 2012" },      
+                    { "name":"Anton", "age":"38", "email":"anton@iainplimmer.co.uk", "tdate":"11 June 2013" },      
+                    { "name":"Nico", "age":"5", "email":"nico@iainplimmer.co.uk", "tdate":"20 November 2014" },      
+                    { "name":"Louca", "age":"8", "email":"louca@iainplimmer.co.uk", "tdate":"22 june 2014" },                                         
                     ],
                 order : 'name', 
                 class : 'table',
                 itemClick : DoSomethingWithTheRow,
                 itemClickText : 'Open',
-                itemsPerPage: 5,
+                itemsPerPage: 20,
                 paging: true,
                 columns: [
-                    { column: 'name', display: 'Person\'s Name', type: 'text' }, 
-                    { column: 'age', display: 'Age', type: 'text' },
-                    { column: 'email', display: 'Email', type: 'email' }
+                    { column: 'name', display: 'Person\'s Name', type: 'text', width: '200px' }, 
+                    { column: 'age', display: 'Age', type: 'number' },
+                    { column: 'email', display: 'Email', type: 'email' },
+                    { column: 'tdate', display: 'Date', type: 'date', format: 'dd MMMM yyyy' }
                 ]         
             };
         })
