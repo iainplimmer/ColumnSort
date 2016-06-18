@@ -16,37 +16,63 @@
             controllerAs: 'ctrl',
             controller: function ($scope) {
                 var vm = this;
-                
+                var columnsToConvertToFloat = [];
+
+                //  Properties available on the view                
                 vm.reverse = false;
                 vm.pages = 0;
                 vm.currentpage = 0;
                 vm.rowcount = 0;
 
-                //  Function that sorts the grid by column name, opposite to the current sort
-                vm.SortColumn = function SortColumn (column) {
-                    vm.config.order = column;
-                    vm.reverse = !vm.reverse;
-                }
-
-                //  Function that allows the user to change page
-                vm.ChangePage = function ChangePage (page) {                
-                    vm.currentpage = page;
-                }
+                //  Functions that are available on the view
+                vm.SortColumn = sortColumn;
+                vm.ChangePage = changePage;
+                vm.GetNumber = getNumber;
             
-                // We setup a watch on the collection to bind the paging
-                $scope.$watchCollection('ctrl.config.data', function (data) {                                
-                    vm.pages = CalculatePages(data.length, vm.config.itemsPerPage);   
+                //  Let's watch the collection of columns and determine which needs to be converted to a number for the sorting of 
+                //  number based data
+                $scope.$watchCollection('ctrl.config.columns', function (columns) {                  
+                    angular.forEach(columns, function (column) {
+                        if (column.type === 'number') {
+                            columnsToConvertToFloat.push(column.column)
+                        }
+                    });
+                })
+
+                //  We setup a watch on the collection to bind the paging, convert any number based columns to floats
+                //  to allow correct sorting and then finally set the rowcount.
+                $scope.$watchCollection('ctrl.config.data', function (data) {   
+
+                    //  Convert each column that is required
+                    angular.forEach(data, function (itemToConvert){
+                        angular.forEach(columnsToConvertToFloat, function (column) {
+                            itemToConvert[column] = parseFloat(itemToConvert[column]);
+                        });
+                    });  
+
+                    vm.pages = calculatePages(data.length, vm.config.itemsPerPage);   
                     vm.rowcount = data.length;                 
                 });
 
 
                 //  Calculates the number of pages as we do this function more than once
-                function CalculatePages(numberOfItems, itemsPerPage) {
+                function calculatePages(numberOfItems, itemsPerPage) {
                     return Math.ceil(numberOfItems / itemsPerPage);
                 }
 
+                //  Function that sorts the grid by column name, opposite to the current sort
+                function sortColumn (column) {
+                    vm.config.order = column;
+                    vm.reverse = !vm.reverse;
+                }
+
+                //  Function that allows the user to change page
+                function changePage (page) {                
+                    vm.currentpage = page;
+                }
+
                 //  Creates an array of a calculated size so we can iterate over it later for the pages
-                vm.GetNumber = function (num) {
+                function getNumber (num) {
                     try {
                         return new Array(num);
                     }   
