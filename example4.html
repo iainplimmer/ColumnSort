@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ng-gridify</title>
+    <script src="./node_modules/angular/angular.min.js"></script>
+    <script src="./node_modules/ng-gridify/ngGridify.js"></script>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css"> 
+    <style>
+        .table {
+            table-layout: fixed;            
+        }
+    </style>
+    <script>
+    angular.module('NamesApplication',['ngGridify'])
+        .controller('ctrlPeople', function ($scope) {
+            
+            function DoSomethingWithTheRow (row) {                
+                alert(row.name + ' has been clicked, you have the whole row item here :)');
+            }
+
+            this.AddNewItem = function () {
+                this.config.data.push({ "name":"A New Person!", "age":"99", "email":"newperson@iainplimmer.co.uk" });
+            }
+
+            this.config = {
+                data : [
+                    { "name":"Iain", "age":"39", "email":"iain@iainplimmer.co.uk" },
+                    { "name":"Sara", "age":"38", "email":"sara@iainplimmer.co.uk" },
+                    { "name":"Erin", "age":"10", "email":"erin@iainplimmer.co.uk" },
+                    { "name":"William", "age":"9", "email":"william@iainplimmer.co.uk" },
+                    { "name":"Jeremy", "age":"69", "email":"jeremy@iainplimmer.co.uk" },
+                    { "name":"Christine", "age":"66", "email":"christine@iainplimmer.co.uk" },      
+                    { "name":"Joanne", "age":"37", "email":"joanne@iainplimmer.co.uk" },      
+                    { "name":"Anton", "age":"38", "email":"anton@iainplimmer.co.uk" },      
+                    { "name":"Nico", "age":"5", "email":"nico@iainplimmer.co.uk" },      
+                    { "name":"Louca", "age":"8", "email":"louca@iainplimmer.co.uk" },                                         
+                    ],
+                order : 'name', 
+                class : 'table',
+                itemClick : DoSomethingWithTheRow,
+                itemClickText : 'Open',
+                itemsPerPage: 5,
+                paging: true,
+                columns: [
+                    { column: 'name', display: 'Person\'s Name', type: 'text' }, 
+                    { column: 'age', display: 'Age', type: 'text' },
+                    { column: 'email', display: 'Email', type: 'email' }
+                ]         
+            };
+        })
+    </script>
+</head>
+<body ng-app="NamesApplication" ng-controller="ctrlPeople as ctrl">
+    <h2>Simple grid with paging, sorting and an item click event</h2>
+
+    <p>Here's an example of a grid with sorting and paging bound to a collection on scope.</p>
+    <p>An item click is provided, this passes through the current item on the form as an object.</p>
+    <p>You can also <a href="#" ng-click="ctrl.AddNewItem()">add a new item</a> to the collection and these are instantly available on the grid.</p>
+
+    <ng-gridify config='ctrl.config'></ng-gridify>
+
+</body>
+</html>
