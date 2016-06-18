@@ -83,17 +83,19 @@ Finally, let's put that together in the config object that we would pass. An exa
             ]         
     };
 
-** IMPORTANT NOTE:** 
+**IMPORTANT NOTE** 
 
 If you want to sort a column that contains numbers or dates, be sure to add it's type as 'number' or 'date'. 
 
-Invalid numbers and dates will be returned as null, this will be hidden in the next version. You CANNOT call your column 'date' as this will break the configuration.
+Invalid numbers and dates will be returned as null, this will be hidden in the next version. 
+
+You CANNOT call your column 'date' as this will break the configuration.
     
 **The Columns Configuration**
 
 Any column can be given a 'width' property to describe it's width in pixels (Percentage not included yet). Although this width is automatically set to the max column size if not specified.
 
-You must include the name of the column as the 'column' propert, this is the minumum configuration required. If this is the case, the column will be set to the type of 'text' and the header will be the name of the 'column' as per your JSON. 
+You must include the name of the column as the 'column' property, this is the minumum configuration required. If this is the case, the column will be set to the type of 'text' and the header will be the name of the 'column' as per your JSON. 
 
 **Adding a function to a row**
 
