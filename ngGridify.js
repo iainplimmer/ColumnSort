@@ -99,7 +99,7 @@
 
                 //  HEADER: We want to loop over the column names one by one, and sow the display names
                 '<th ng-repeat="column in ctrl.config.columns" width="{{column.width}}">',
-                '<a href="#" ng-click="ctrl.SortColumn(column.column)">{{column.display ? column.display : column.column}}</a> ',
+                '<a href="#null" ng-click="ctrl.SortColumn(column.column)">{{column.display ? column.display : column.column}}</a> ',
                 ' <span ng-show="ctrl.config.order == column.column && ctrl.reverse" class="glyphicon glyphicon-triangle-bottom"></span>',
                 ' <span ng-show="ctrl.config.order == column.column && !ctrl.reverse" class="glyphicon glyphicon-triangle-top"></span>',
                 '</th>',
