@@ -91,6 +91,12 @@ Finally, let's put that together in the config object that we would pass. An exa
 * You **CANNOT** call your column 'date' as this will break the configuration, sorry.
 * Any column can be given a 'width' property to describe it's width in pixels (Percentage not included yet). Although this width is automatically set to the max column size if not specified.
 
+**Binding Data from HTTP Promises**
+
+You can of course bind data from HTTP promises. I recommend that you first set the 'data' property to and empty array [] then after the config stage has passed and the promise resolved, then bind the data. 
+
+The example [here](https://github.com/iainplimmer/ngGridify/blob/master/samples/GettingDataFromHttp.html) shows this technique in practice. Basically, the watcher on the collection is invoked and circumvents any race conditions. If you have a better way, please let me know ;)  
+
 **Adding a function to a row**
 
 You can add a button to each row that accepts a function, and some text. Let's take the following simple javascript function that just accepts the data from the row. This appears on the far right column.

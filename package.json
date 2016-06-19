@@ -1,7 +1,7 @@
 {
   "name": "ng-gridify",
-  "version": "1.4.6",
-  "description": "Generic grid for angularJS",
+  "version": "1.5.0",
+  "description": "Generic grid for angularJS with paging, sorting, the ability to export CSV and configurable content.",
   "main": "",
   "scripts": { },
   "keywords": [

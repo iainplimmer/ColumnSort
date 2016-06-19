@@ -22,11 +22,12 @@
 
             //  First configure the config object that is passed to the ng-gridify component
             this.config = {
-                  data : self.mydata,
+                  data : [],
                   order : 'name', 
                   class : 'table',
                   itemClick : null,
                   itemClickText : null,
+                  export : true;
                   itemsPerPage: 20,
                   paging: true,
                   columns: [
