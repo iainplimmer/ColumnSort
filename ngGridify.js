@@ -1,4 +1,4 @@
-(function(angular){
+(function(angular, window){
     'use strict';
 
     angular.module('ngGridify', [])
@@ -29,11 +29,12 @@
                 vm.SortColumn = sortColumn;
                 vm.ChangePage = changePage;
                 vm.GetNumber = getNumber;
+                vm.ExportCSV = exportCSV;
             
                 //  Let's watch the collection of columns and determine which needs to be converted to a number for the sorting of 
                 //  number based data
                 $scope.$watchCollection('ctrl.config.columns', function (columns) {                  
-                    angular.forEach(columns, function (column) {
+                    columns.map(function (column) {
                         if (column.type === 'number') {
                             columnsToConvertToFloat.push(column.column)
                         }
@@ -48,11 +49,11 @@
                 $scope.$watchCollection('ctrl.config.data', function (data) {   
 
                     //  Convert each column that is required on numbers and dates to allow sorting 
-                    angular.forEach(data, function (itemToConvert){
-                        angular.forEach(columnsToConvertToFloat, function (column) {
+                    data.map(function (itemToConvert){
+                        columnsToConvertToFloat.map(function (column) {
                             itemToConvert[column] = parseFloat(itemToConvert[column]);
                         });
-                        angular.forEach(columnsToConvertToDate, function (column) {
+                        columnsToConvertToDate.map(function (column) {
                             itemToConvert[column] = new Date(itemToConvert[column]);
                         });
                     });  
@@ -63,9 +64,26 @@
                     }                 
                 });
 
+                //  Function that takes the columns collection, creates a CSV representation of the data, and pushes it to the browser
+                function exportCSV () {
+
+                    var csvContent = "data:text/csv;charset=utf-8,";
+
+                    vm.config.data.map(function (item){                            
+                        csvContent += Object.keys(item).map(function (k) {
+                            if (k !== '$$hashKey'){
+                                return item[k]
+                            }
+                        }).join(",") + '\n';
+                    })
+
+                    //  Open the CSV in a new window here
+                    var encodedUri = encodeURI(csvContent);
+                    window.open(encodedUri);
+                }
 
                 //  Calculates the number of pages as we do this function more than once
-                function calculatePages(numberOfItems, itemsPerPage) {
+                function calculatePages (numberOfItems, itemsPerPage) {
                     return Math.ceil(numberOfItems / itemsPerPage);
                 }
 
@@ -93,7 +111,7 @@
 
             },
             template: [
-                '<div>{{ctrl.rowcount}} records found.</div>',
+                '<div>{{ctrl.rowcount}} records found. <button ng-click="ctrl.ExportCSV()">XXXPort</button></div>',
                 '<table class="{{ctrl.config.class}}" ng-show="ctrl.rowcount > 0">',
                 '<tr>',
 
@@ -141,4 +159,4 @@
             ].join('')
         });
 
-})(angular);
+})(angular, window);
