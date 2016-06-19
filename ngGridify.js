@@ -135,7 +135,7 @@
                 //  PAGING
                 '<nav ng-show="ctrl.config.paging">',
                 '<ul class="pagination">',
-                '<li ng-repeat="item in ctrl.GetNumber(ctrl.pages) track by $index" class="page-item"><a class="page-link" href="#" ng-click="ctrl.ChangePage($index)">{{$index+1}}</a></li>',
+                '<li ng-repeat="item in ctrl.GetNumber(ctrl.pages) track by $index" class="page-item"><a class="page-link" href="#null" ng-click="ctrl.ChangePage($index)">{{$index+1}}</a></li>',
                 '</ul>',
                 '</nav>'
             ].join('')
