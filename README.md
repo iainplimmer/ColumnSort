@@ -65,7 +65,7 @@ We need to create a config object that we pass to the component. The example bel
 * **date** - formats the column as a date, you can pass in an additional 'format' property here. *Invalid dates will be returned as null.
 * **link** - you guessed it, creates a hyperlink with a new window target. 
 
-Finally, let's put that together in the config object that we would pass. An example for each 'type' is included in the JSON above.
+Finally, let's put that together in the config object that we would pass. An example for each 'type' is included in the JSON above. To display a column from your JSON, you must include it in the columns collection. The minimum you can have is the 'column' property. 
 
     var config = {
         data : data,
@@ -85,11 +85,33 @@ Finally, let's put that together in the config object that we would pass. An exa
             ]         
     };
 
-**IMPORTANT NOTE** 
+**The Columns Collection** 
+
+This is required. Only columns specified in this collection will be displayed on the grid.
 
 * If you want to sort a column that contains numbers or dates, be sure to add it's type as 'number' or 'date'. 
 * You **CANNOT** call your column 'date' as this will break the configuration, sorry.
 * Any column can be given a 'width' property to describe it's width in pixels (Percentage not included yet). Although this width is automatically set to the max column size if not specified.
+
+**Exporting to CSV**
+
+By setting the 'export' property to true, the grid will include a button that allows the user to download the content to a CSV file in the browser. 
+
+The default setting is that it exports the same columns as in the view.
+
+**Styling**
+
+Section to be completed...
+
+**Ordering**
+
+By Default, column ordering is turned on, you just need to set the default order when the grid is displayed using the 'order' property.
+
+**Paging**
+
+You can turn paging on or off, but the 'itemsPerPage' will still need to be passed. If you want a single page, set this value to the max size of your data collection.
+
+
 
 **Binding Data from HTTP Promises**
 
