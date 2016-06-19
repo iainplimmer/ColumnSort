@@ -111,7 +111,9 @@
 
             },
             template: [
-                '<div>{{ctrl.rowcount}} records found. <button ng-click="ctrl.ExportCSV()">XXXPort</button></div>',
+                '<div class="nggridify-rowcount">{{ctrl.rowcount}} records found.</div>',
+                '<div class="nggridify-export"><button ng-show="ctrl.config.export" ng-click="ctrl.ExportCSV()">Export to CSV</button></div>',
+                
                 '<table class="{{ctrl.config.class}}" ng-show="ctrl.rowcount > 0">',
                 '<tr>',
 

@@ -55,7 +55,7 @@ Let's say that we have this collection of data
 
 
 
-We can create a config object that we pass to the component, which will show two items per page, with the paging control, a default ordering of the 'name' column. Which is great; we can also 'type' our data and choose a different
+We can create a config object that we pass to the component, which will show two items per page, with the paging control, a default ordering of the 'name' column. We can also 'type' our data and choose a different way to display the data.
 
 ** NOTE: If you add items to this data object, they automatically appear on the grid in the current sort order position, and the paging is updated now! **
 
