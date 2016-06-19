@@ -67,17 +67,23 @@
                 //  Function that takes the columns collection, creates a CSV representation of the data, and pushes it to the browser
                 function exportCSV () {
 
+                    //  The content type needs to be set to allow it to be opened in numbers/excel/openofice
                     var csvContent = "data:text/csv;charset=utf-8,";
 
-                    vm.config.data.map(function (item){                            
-                        csvContent += Object.keys(item).map(function (k) {
-                            if (k !== '$$hashKey'){
-                                return item[k]
-                            }
+                    //  Setup the headers
+                    csvContent += vm.config.columns.map(function (column) {                            
+                        return column.display ? column.display : column.column;
+                    }).join(",") + '\n';
+
+                    //  I'm sure there is a more efficient way to do this, but we basically loop over the items, match the requested columns 
+                    //  push the result into a comma delimited string, with a new line on each row.
+                    vm.config.data.map(function (item){     
+                        csvContent += vm.config.columns.map(function (column) {                            
+                            return item[column.column];
                         }).join(",") + '\n';
                     })
 
-                    //  Open the CSV in a new window here
+                    //  Open the content in a new window
                     var encodedUri = encodeURI(csvContent);
                     window.open(encodedUri);
                 }
